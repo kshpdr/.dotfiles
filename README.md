@@ -32,6 +32,7 @@ idempotent, so it's safe to re-run. Order matters: bootstrap, then stow
 | `zsh`     | zsh + oh-my-zsh (`.zshrc`, `.zprofile`) |
 | `git`     | git (`.gitconfig`, `~/.config/git/ignore`) |
 | `tmux`    | tmux + TPM (`.tmux.conf`) |
+| `nvim`    | Neovim (`.config/nvim/init.lua`) |
 
 ## Adding a new config
 
