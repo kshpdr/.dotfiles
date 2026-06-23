@@ -14,15 +14,22 @@ wezterm/.wezterm.lua  ->  ~/.wezterm.lua
 ```sh
 git clone https://github.com/kshpdr/.dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
+./bootstrap.sh          # install third-party deps (oh-my-zsh + plugins) — run first
 ./install.sh            # stow everything (installs stow via Homebrew if needed)
 ./install.sh wezterm    # or just one package
 ```
 
+`bootstrap.sh` installs things this repo deliberately does **not** vendor —
+oh-my-zsh and its custom plugins are upstream git repos, not ours. It's
+idempotent, so it's safe to re-run. Order matters: bootstrap, then stow
+(bootstrap keeps any existing `.zshrc`; stow then symlinks ours over it).
+
 ## Packages
 
-| Package   | What it configures            |
-| --------- | ----------------------------- |
+| Package   | What it configures                |
+| --------- | --------------------------------- |
 | `wezterm` | WezTerm terminal (`.wezterm.lua`) |
+| `zsh`     | zsh + oh-my-zsh (`.zshrc`, `.zprofile`) |
 
 ## Adding a new config
 
