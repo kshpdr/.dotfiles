@@ -30,6 +30,8 @@ idempotent, so it's safe to re-run. Order matters: bootstrap, then stow
 | --------- | --------------------------------- |
 | `wezterm` | WezTerm terminal (`.wezterm.lua`) |
 | `zsh`     | zsh + oh-my-zsh (`.zshrc`, `.zprofile`) |
+| `git`     | git (`.gitconfig`, `~/.config/git/ignore`) |
+| `tmux`    | tmux + TPM (`.tmux.conf`) |
 
 ## Adding a new config
 

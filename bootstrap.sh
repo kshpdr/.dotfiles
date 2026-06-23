@@ -36,4 +36,14 @@ clone_plugin zsh-autosuggestions        https://github.com/zsh-users/zsh-autosug
 clone_plugin zsh-syntax-highlighting    https://github.com/zsh-users/zsh-syntax-highlighting
 clone_plugin zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
 
+# --- tmux: TPM (plugin manager referenced in tmux/.tmux.conf) ----------------
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+if [ ! -d "$TPM_DIR" ]; then
+  echo "installing tpm (tmux plugin manager)…"
+  git clone --depth=1 https://github.com/tmux-plugins/tpm "$TPM_DIR"
+  echo "  note: start tmux and press <prefix> + I (Ctrl-Space, then Shift-i) to install plugins."
+else
+  echo "tpm already installed — skipping."
+fi
+
 echo "bootstrap done. Now run: ./install.sh"

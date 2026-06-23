@@ -1,0 +1,12 @@
+[user]
+	name = Denis Koshelev
+	email = truemacintoshchannel@gmail.com
+	signingkey = /Users/koshelev/.ssh/id_ed25519.pub
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
