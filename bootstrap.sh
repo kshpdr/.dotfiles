@@ -32,9 +32,9 @@ clone_plugin() {
   fi
 }
 
+clone_plugin zsh-autocomplete           https://github.com/marlonrichert/zsh-autocomplete
 clone_plugin zsh-autosuggestions        https://github.com/zsh-users/zsh-autosuggestions
 clone_plugin zsh-syntax-highlighting    https://github.com/zsh-users/zsh-syntax-highlighting
-clone_plugin zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
 
 # --- tmux: TPM (plugin manager referenced in tmux/.tmux.conf) ----------------
 TPM_DIR="$HOME/.tmux/plugins/tpm"
