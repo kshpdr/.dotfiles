@@ -70,14 +70,28 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+# NOTE: zsh-autocomplete, zsh-autosuggestions and zsh-syntax-highlighting are
+# sourced manually below (after oh-my-zsh) so their load order is correct —
+# zsh-autocomplete is picky about order and conflicts with oh-my-zsh's compinit
+# timing if loaded here. zsh-history-substring-search is gone: zsh-autocomplete
+# owns the ↑/↓ live history menu now.
 plugins=(
   git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# ---- zsh-autocomplete + friends (order matters; highlighting must be last) ----
+# Calmer tuning — must be set BEFORE sourcing zsh-autocomplete.
+zstyle ':autocomplete:*' min-input 2        # don't show the list until 2+ chars
+zstyle ':autocomplete:*' list-lines 8       # cap the live list at 8 rows
+zstyle ':autocomplete:*' delay 0.15         # brief pause before the list appears
+zstyle ':autocomplete:*' insert-unambiguous yes
+source $ZSH/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+# Inline grey history suggestion + syntax highlighting, loaded AFTER autocomplete.
+source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh   # keep LAST
 
 # User configuration
 
@@ -114,22 +128,9 @@ setopt SHARE_HISTORY          # share history across sessions
 setopt HIST_IGNORE_ALL_DUPS   # no duplicate entries
 setopt HIST_REDUCE_BLANKS     # strip extra whitespace
 setopt INC_APPEND_HISTORY     # write commands as you go
-
-# Bind up/down arrows to history-substring-search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-# Tab-completion tuning (oh-my-zsh already runs compinit; this refines it)
-zmodload zsh/complist
-setopt AUTO_MENU             # show completion menu on a successive tab press
-setopt COMPLETE_IN_WORD     # complete from both ends of a word
-setopt ALWAYS_TO_END        # move cursor to end of word after completion
-unsetopt MENU_COMPLETE      # don't autoselect first match; show the menu
-
-zstyle ':completion:*' menu select                                      # arrow-key navigable menu
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'l:|=* r:|=*' # case-insensitive + partial
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                 # colorize matches like ls
-zstyle ':completion:*' group-name ''                                    # group matches by category
-zstyle ':completion:*:descriptions' format '%F{yellow}%d%f'            # colored section headers
+# (↑/↓ history is handled by zsh-autocomplete's live history menu, above.)
+# A couple of completion niceties zsh-autocomplete leaves to you:
+setopt COMPLETE_IN_WORD       # complete from both ends of a word
+setopt ALWAYS_TO_END          # move cursor to end of word after completion
 
 export PATH="$HOME/.local/bin:$PATH"
