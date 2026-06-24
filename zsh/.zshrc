@@ -118,4 +118,18 @@ setopt INC_APPEND_HISTORY     # write commands as you go
 # Bind up/down arrows to history-substring-search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+# Tab-completion tuning (oh-my-zsh already runs compinit; this refines it)
+zmodload zsh/complist
+setopt AUTO_MENU             # show completion menu on a successive tab press
+setopt COMPLETE_IN_WORD     # complete from both ends of a word
+setopt ALWAYS_TO_END        # move cursor to end of word after completion
+unsetopt MENU_COMPLETE      # don't autoselect first match; show the menu
+
+zstyle ':completion:*' menu select                                      # arrow-key navigable menu
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'l:|=* r:|=*' # case-insensitive + partial
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                 # colorize matches like ls
+zstyle ':completion:*' group-name ''                                    # group matches by category
+zstyle ':completion:*:descriptions' format '%F{yellow}%d%f'            # colored section headers
+
 export PATH="$HOME/.local/bin:$PATH"
