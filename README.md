@@ -33,6 +33,7 @@ idempotent, so it's safe to re-run. Order matters: bootstrap, then stow
 | `git`     | git (`.gitconfig`, `~/.config/git/ignore`) |
 | `tmux`    | tmux + TPM (`.tmux.conf`) |
 | `nvim`    | Neovim (`.config/nvim/init.lua`) |
+| `herdr`   | herdr agent workspace manager (`.config/herdr/config.toml`) |
 
 ## Adding a new config
 

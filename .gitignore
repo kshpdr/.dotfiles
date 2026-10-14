@@ -14,3 +14,7 @@
 # Editor/OS noise
 *.swp
 *~
+
+# herdr runtime state (logs, sockets, sessions) — only config.toml is tracked
+herdr/.config/herdr/*
+!herdr/.config/herdr/config.toml
