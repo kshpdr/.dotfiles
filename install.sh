@@ -12,13 +12,16 @@ set -euo pipefail
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$DOTFILES_DIR"
 
-# Install GNU Stow if it's missing (macOS / Homebrew).
+# Install GNU Stow if it's missing (Homebrew on macOS, apt on Debian/Ubuntu).
 if ! command -v stow >/dev/null 2>&1; then
   if command -v brew >/dev/null 2>&1; then
     echo "stow not found — installing via Homebrew…"
     brew install stow
+  elif command -v apt-get >/dev/null 2>&1; then
+    echo "stow not found — installing via apt…"
+    sudo apt-get install -y stow
   else
-    echo "error: GNU Stow is required and Homebrew is not available." >&2
+    echo "error: GNU Stow is required and neither Homebrew nor apt is available." >&2
     echo "Install stow manually, then re-run this script." >&2
     exit 1
   fi
